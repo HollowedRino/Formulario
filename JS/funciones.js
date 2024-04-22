@@ -1,6 +1,11 @@
 window.onload = function() {
     document.getElementById("btnEnviar").addEventListener("click", registrarUsuario);
+    document.getElementById("btnEnviar").addEventListener("click", imprimirConsola);
     document.getElementById("btnEnviarConDOM").addEventListener("click", registrarUsuarioDOM)
+
+    function imprimirConsola(){
+        console.log("XD");
+    }
 
     function registrarUsuario(){
         console.log("funciona");
