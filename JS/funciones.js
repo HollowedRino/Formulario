@@ -1,7 +1,11 @@
 window.onload = function() {
     document.getElementById("btnEnviar").addEventListener("click", registrarUsuario);
     document.getElementById("btnEnviar").addEventListener("click", imprimirConsola);
-    document.getElementById("btnEnviarConDOM").addEventListener("click", registrarUsuarioDOM)
+
+    document.getElementById("btnEnviarConDOM").addEventListener("click", registrarUsuarioDOM);
+    document.getElementById("btnMostrar").addEventListener("click",listarUsuarios);
+
+    var arrUsuarios = [];
 
     function imprimirConsola(){
         console.log("XD");
@@ -10,21 +14,34 @@ window.onload = function() {
     function registrarUsuario(){
         console.log("funciona");
         //capturar datos del formulario
+        
+        let nuevoUsuario = {
+            usuario: document.getElementById("usuario").value,
+            nombre: document.getElementById("nombre").value,
+            apellidos: document.getElementById("apellidos").value,
+            edad: document.getElementById("edad").value,
+            password: document.getElementById("password").value
+        }
+        console.log("objeto",nuevoUsuario);
+        /*
         let usuario = document.getElementById("usuario").value;
         let nombre = document.getElementById("nombre").value;
         let apellidos = document.getElementById("apellidos").value;
         let edad = document.getElementById("edad").value;
         let password = document.getElementById("password").value;
+        */
         //insertar en la tabla
         const bodytabla = document.getElementById("tab_body1");
         let str_insercion = 
-            "<tr><td>"+usuario+
-            "</td><td>"+nombre+
-            "</td><td>"+apellidos+
-            "</td><td>"+edad+
-            "</td><td>"+password+
+            "<tr><td>"+nuevoUsuario.usuario+
+            "</td><td>"+nuevoUsuario.nombre+
+            "</td><td>"+nuevoUsuario.apellidos+
+            "</td><td>"+nuevoUsuario.edad+
+            "</td><td>"+nuevoUsuario.password+
             "</td></tr>"
         bodytabla.innerHTML += str_insercion;
+        arrUsuarios.push(nuevoUsuario);
+        console.log(arrUsuarios);
     }
     function registrarUsuarioDOM(){
         console.log("DOM");
@@ -70,5 +87,21 @@ window.onload = function() {
 
         const table = document.getElementById("tab_body1");
         table.appendChild(row);
+    }
+
+    function listarUsuarios(){
+        const bodytabla = document.getElementById("tab_body2");
+        let str_insercion = "";
+        for(let id in arrUsuarios){
+            console.log(id, arrUsuarios[id]);
+            str_insercion += 
+            "<tr><td>"+arrUsuarios[id].usuario+
+            "</td><td>"+arrUsuarios[id].nombre+
+            "</td><td>"+arrUsuarios[id].apellidos+
+            "</td><td>"+arrUsuarios[id].edad+
+            "</td><td>"+arrUsuarios[id].password+
+            "</td></tr>";
+        }
+        bodytabla.innerHTML += str_insercion;
     }
 }
